@@ -241,13 +241,13 @@ class WaifuDiffusionInterrogator(Interrogator):
         # https://onnxruntime.ai/docs/get-started/with-python.html#install-onnx-runtime
         # TODO: remove old package when the environment changes?
         from launch import is_installed, run_pip
-        if not is_installed('onnxruntime'):
+        if not is_installed('ort_nightly'):
             package = os.environ.get(
-                'ONNXRUNTIME_PACKAGE',
-                'onnxruntime-gpu'
+                'ort_nightly_PACKAGE',
+                'ort_nightly_gpu'
             )
 
-            run_pip(f'install {package}', 'onnxruntime')
+            run_pip(f'install {package} --index-url https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/ORT-Nightly/pypi/simple/ --extra-index-url https://pypi.org/simple/ --upgrade', 'ort_nightly')
 
         from onnxruntime import InferenceSession
 
